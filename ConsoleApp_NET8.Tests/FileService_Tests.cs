@@ -18,21 +18,6 @@ public class FileService_Tests
 
         // Assert
         Assert.True(result, "SaveToFile returned false");
-        //if (File.Exists(filePath))
-        //{
-        //    // Additional logging
-        //    Console.WriteLine("File was created successfully.");
-        //}
-        //else
-        //{
-        //    Console.WriteLine("File creation failed or the file does not exist.");
-        //}
-
-        //// Clean up: Delete the created file
-        //if (File.Exists(filePath))
-        //{
-        //    File.Delete(filePath);
-        //}
     }
 
     [Fact]
