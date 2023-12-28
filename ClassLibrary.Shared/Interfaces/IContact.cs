@@ -1,6 +1,8 @@
-﻿namespace ClassLibrary.Shared.Interfaces;
+﻿using System.ComponentModel;
 
-public interface IContact
+namespace ClassLibrary.Shared.Interfaces;
+
+public interface IContact : INotifyPropertyChanged
 {
     Guid Id { get; set; }
     string FirstName { get; set; }

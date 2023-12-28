@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="WPF_App_NET8.Mvvm.Views.EditContactFromListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_App_NET8.Mvvm.Views"
+             xmlns:models="clr-namespace:WPF_App_NET8.Models"
+             Background="LightGray"
+
+
+             xmlns:viewmodels="clr-namespace:WPF_App_NET8.Mvvm.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:EditContactFromListViewModel}"
+
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400"
+             Loaded="EditContactFromListView_Loaded">
+
+
+    <Grid Margin="20">
+
+        <StackPanel Margin="0,0,0,30">
+            <Label Content="Edit Contact Details" FontWeight="Bold" />
+            <Label Content="First Name" />
+            <TextBox x:Name="Input_FirstName" Text="{Binding SelectedContact.FirstName, Mode=TwoWay}" Padding="2,5"/>
+            <Label Content="Last Name" />
+            <TextBox x:Name="Input_LastName" Text="{Binding SelectedContact.LastName, Mode=TwoWay}" Padding="2,5"/>
+            <Label Content="Email" />
+            <TextBox x:Name="Input_Email" Text="{Binding SelectedContact.Email, Mode=TwoWay}" Padding="2,5"/>
+            <Label Content="Phone Number" />
+            <TextBox x:Name="Input_PhoneNumber" Text="{Binding SelectedContact.PhoneNumber, Mode=TwoWay}" Padding="2,5"/>
+            <Label Content="Address" />
+            <TextBox x:Name="Input_Address" Text="{Binding SelectedContact.Address, Mode=TwoWay}" Padding="2,5"/>
+            <Button Background="DarkGray" FontWeight="Bold" Content="Edit Contact" Command="{Binding EditContactFromListCommand}" Click="Button_Click" Padding="0,5" Margin="0,15"/>
+        </StackPanel>
+
+
+    </Grid>
+    
+    
+</UserControl>

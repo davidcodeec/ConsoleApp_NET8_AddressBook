@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="WPF_App_NET8.Mvvm.Views.AddContactToListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_App_NET8.Mvvm.Views"
+             Background="LightGray"
+             
+             xmlns:viewmodels="clr-namespace:WPF_App_NET8.Mvvm.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddContactToListViewModel}"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400"
+             Loaded="AddContactToListView_Loaded">
+    
+
+    <Grid Margin="20">
+
+        <StackPanel Margin="0,0,0,30">
+            <Label Content="First Name" />
+            <TextBox x:Name="Input_FirstName" Text="{Binding ContactForm.FirstName}" Padding="2,5"/>
+            <Label Content="Last Name" />
+            <TextBox Text="{Binding ContactForm.LastName}" Padding="2,5"/>
+            <Label Content="Email" />
+            <TextBox Text="{Binding ContactForm.Email}" Padding="2,5"/>
+            <Label Content="Phone Number" />
+            <TextBox Text="{Binding ContactForm.PhoneNumber}" Padding="2,5"/>
+            <Label Content="Address" />
+            <TextBox Text="{Binding ContactForm.Address}" Padding="2,5"/>
+            <Button Background="DarkGray" FontWeight="Bold" Content="Add Contact" Command="{Binding AddContactToListCommand}" Padding="0,5" Margin="0,15"/>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

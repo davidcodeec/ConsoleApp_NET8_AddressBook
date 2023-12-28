@@ -18,6 +18,7 @@ public class ContactService : IContactService
         _filePath = filePath;
     }
 
+
     public IServiceResult<IContact> AddContactToList(IContact contact)
     {
         IServiceResult<IContact> response = new ServiceResult<IContact>();
@@ -82,23 +83,31 @@ public class ContactService : IContactService
         return response;
     }
 
-    public IServiceResult<IContact> EditContactFromList(IContact editedContact)
+    public IServiceResult<IContact> EditContactFromList(string existingEmail, IContact editedContact)
     {
         IServiceResult<IContact> response = new ServiceResult<IContact>();
 
         try
         {
-            if (!string.IsNullOrEmpty(editedContact.Email))
+            if (!string.IsNullOrEmpty(existingEmail) && editedContact != null)
             {
-                var existingContact = _contacts.FirstOrDefault(x => x.Email == editedContact.Email);
+                var existingContact = _contacts.FirstOrDefault(x => x.Email == existingEmail);
 
                 if (existingContact != null)
                 {
+
+                    // Remove the existing contact from the list
+                    _contacts.Remove(existingContact);
+
                     // Update the properties of the existing contact with the edited contact
+                    existingContact.Email = editedContact.Email;
                     existingContact.FirstName = editedContact.FirstName;
                     existingContact.LastName = editedContact.LastName;
                     existingContact.PhoneNumber = editedContact.PhoneNumber;
                     existingContact.Address = editedContact.Address;
+
+                    // Add the edited contact back to the list
+                    _contacts.Add(existingContact);
 
                     response.Status = Enums.ServiceStatus.SUCCESSED;
 
@@ -134,7 +143,7 @@ public class ContactService : IContactService
 
         try
         {
-            if (!string.IsNullOrEmpty(contact.Email))
+            if (!_contacts.Contains(contact) || string.IsNullOrEmpty(contact.Email))
             {
                 var existingContact = _contacts.FirstOrDefault(x => x.Email.Trim().Equals(contact.Email.Trim(), StringComparison.OrdinalIgnoreCase));
 

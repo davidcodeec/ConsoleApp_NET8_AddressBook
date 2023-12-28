@@ -8,4 +8,5 @@ public enum ServiceStatus
     NOT_FOUND = 3,
     UPDATED = 4,
     DELETED = 5,
+    UNKNOWN = 6,
 }

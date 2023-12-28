@@ -92,7 +92,7 @@ public class MenuService : IMenuService
         Console.Write("Phone Number: ");
         contact.PhoneNumber = Console.ReadLine()!;
 
-        Console.Write("Address ");
+        Console.Write("Address: ");
         contact.Address = Console.ReadLine()!;
 
         var res = _contactService.AddContactToList(contact);
@@ -216,6 +216,10 @@ public class MenuService : IMenuService
                     var lastName = Console.ReadLine();
                     contactToEdit.LastName = string.IsNullOrEmpty(lastName) ? contactToEdit.LastName : lastName;
 
+                    Console.Write($"Email ({contactToEdit.Email}): ");
+                    var editedEmail = Console.ReadLine();
+                    contactToEdit.Email = string.IsNullOrEmpty(editedEmail) ? contactToEdit.Email : editedEmail;
+
                     Console.Write($"Phone Number ({contactToEdit.PhoneNumber}): ");
                     var phoneNumber = Console.ReadLine();
                     contactToEdit.PhoneNumber = string.IsNullOrEmpty(phoneNumber) ? contactToEdit.PhoneNumber : phoneNumber;
@@ -225,7 +229,7 @@ public class MenuService : IMenuService
                     contactToEdit.Address = string.IsNullOrEmpty(address) ? contactToEdit.Address : address;
 
                     // Save the edited contact
-                    var editResult = _contactService.EditContactFromList(contactToEdit);
+                    var editResult = _contactService.EditContactFromList(contactToEdit.Email, contactToEdit);
 
                     if (editResult.Status == Enums.ServiceStatus.SUCCESSED)
                     {

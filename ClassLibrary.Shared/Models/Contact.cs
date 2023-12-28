@@ -1,4 +1,5 @@
 ﻿using ClassLibrary.Shared.Interfaces;
+using System.ComponentModel;
 
 namespace ClassLibrary.Shared.Models;
 
@@ -10,4 +11,6 @@ public class Contact : IContact
     public string PhoneNumber { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string Address { get; set; } = null!;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }

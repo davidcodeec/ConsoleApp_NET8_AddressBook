@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="WPF_App_NET8.Mvvm.Views.GetContactFromListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_App_NET8.Mvvm.Views"
+             Background="LightGray"
+             
+             xmlns:viewmodels="clr-namespace:WPF_App_NET8.Mvvm.ViewModels"
+             xmlns:models="clr-namespace:ClassLibrary.Shared.Models;assembly=ClassLibrary.Shared"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GetContactFromListViewModel}"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" FontWeight="Bold" Content="New Contact" Command="{Binding NavigateToAddContactToListCommand}" Padding="5"/>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding ContactList}" HorizontalContentAlignment="Stretch" Margin="0,20,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Contact}">
+                    <Grid Margin="2,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock>
+                                 <Run Text="First Name: " FontWeight="Bold"/>
+                                 <Run Text="{Binding FirstName}" />     
+                            </TextBlock>
+                            <TextBlock>
+                                 <Run Text="Last Name: " FontWeight="Bold"/>
+                                 <Run Text="{Binding LastName}" />  
+                            </TextBlock>
+                            <TextBlock>
+                                 <Run Text="Email: " FontWeight="Bold"/>
+                                 <Run Text="{Binding Email}" />
+                            </TextBlock>
+                            <TextBlock>
+                                 <Run Text="Phone Number: " FontWeight="Bold"/>
+                                 <Run Text="{Binding PhoneNumber}" />
+                            </TextBlock>
+                            <TextBlock>
+                                 <Run Text="Address: " FontWeight="Bold"/>
+                                 <Run Text="{Binding Address}" />
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button Content="Edit" CommandParameter="{Binding .}" Command="{Binding DataContext.NavigateToEditContactFromListCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Grid.Column="1" Width="40" Height="22"/>
+                            <Button Content="Delete" CommandParameter="{Binding .}" Command="{Binding DataContext.RemoveContactFromListCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Grid.Column="1" Width="40" Height="22" Background="Red"/>
+                        </StackPanel>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</UserControl>

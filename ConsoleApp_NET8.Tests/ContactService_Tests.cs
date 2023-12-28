@@ -111,7 +111,7 @@ public class ContactService_Tests
             Address = "Updated Johns Address"
         };
 
-        var editResult = contactService.EditContactFromList(editedContact);
+        var editResult = contactService.EditContactFromList(existingContact.Email, editedContact);
 
         // Assert
         Assert.True(editResult.Status == ServiceStatus.SUCCESSED);
