@@ -9,6 +9,7 @@ namespace WPF_App_NET8.Mvvm.Views;
 
 public partial class EditContactFromListView : UserControl
 {
+
     public EditContactFromListView()
     {
         InitializeComponent();

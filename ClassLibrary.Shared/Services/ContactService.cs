@@ -71,7 +71,6 @@ public class ContactService : IContactService
             }
             response.Status = Enums.ServiceStatus.SUCCESSED;
             response.Result = _contacts;
-            //Console.WriteLine("Contacts retrieved successfully in GetCustomersFromList");
         }
         catch (Exception ex)
         {

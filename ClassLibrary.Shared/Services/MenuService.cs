@@ -66,7 +66,7 @@ public class MenuService : IMenuService
     {
         Console.Clear();
         Console.Write("Are you sure you want to close the application? (y/n): ");
-        var option = Console.ReadLine() ?? ""; // If not is pressed use empty string
+        var option = Console.ReadLine() ?? "";
 
         if (option.Equals("y", StringComparison.CurrentCultureIgnoreCase))
         {
@@ -269,7 +269,6 @@ public class MenuService : IMenuService
 
         if (res.Status == Enums.ServiceStatus.SUCCESSED)
         {
-            //Console.WriteLine("Customers retrieved successfully");
             if (res.Result is List<IContact> contactList)
             {
                 if (!contactList.Any())
@@ -293,7 +292,6 @@ public class MenuService : IMenuService
             }
         }
 
-        //Console.ReadKey(intercept: true);
         Console.ReadKey();
 
         DisplayPressAnyKey("Press any key to continue.");
@@ -304,13 +302,11 @@ public class MenuService : IMenuService
     {
         Console.Clear();
         Console.WriteLine($"################### {title} ###################");
-        //Console.WriteLine();
     }
 
     private void DisplayPressAnyKey(string message)
     {
         Console.WriteLine(message);
-        //Console.ReadKey(intercept: true);
         Console.ReadKey();
     }
 }

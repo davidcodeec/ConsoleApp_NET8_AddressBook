@@ -24,6 +24,14 @@ public class IContactConverter : JsonConverter<IContact>
 
     public override void WriteJson(JsonWriter writer, IContact value, JsonSerializer serializer)
     {
-        throw new NotImplementedException();
+        var settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            TypeNameHandling = TypeNameHandling.Objects, // Add TypeNameHandling to include type information
+            Formatting = Formatting.Indented,   // Other settings
+        };
+
+        string serializedJson = JsonConvert.SerializeObject(value, settings);
+        writer.WriteRawValue(serializedJson);
     }
 }

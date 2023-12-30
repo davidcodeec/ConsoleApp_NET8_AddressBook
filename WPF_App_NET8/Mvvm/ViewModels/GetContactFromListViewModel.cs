@@ -48,7 +48,7 @@ public partial class GetContactFromListViewModel : ObservableObject
             response.Status = ClassLibrary.Shared.Enums.ServiceStatus.SUCCESSED;
             response.Result = _contactList;
             OnPropertyChanged(nameof(_contactList));
-            //Console.WriteLine("Contacts retrieved successfully in GetCustomersFromList");
+            Debug.WriteLine("Contacts recieved successfully.");
         }
         catch (Exception ex)
         {
@@ -72,8 +72,10 @@ public partial class GetContactFromListViewModel : ObservableObject
     [RelayCommand]
     private void NavigateToEditContactFromList(IContact selectedContact)
     {
+        var editViewModel = _serviceProvider.GetRequiredService<EditContactFromListViewModel>();
+        editViewModel.SelectedContact = selectedContact;  // Set the selected contact
         var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-        mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<EditContactFromListViewModel>();
+        mainViewModel.CurrentViewModel = editViewModel;
     }
 
     [RelayCommand]

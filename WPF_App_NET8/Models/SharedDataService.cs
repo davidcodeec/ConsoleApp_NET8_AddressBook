@@ -12,14 +12,7 @@ public class SharedDataService : ISharedDataService, INotifyPropertyChanged
     public ObservableCollection<IContact> ContactList
     {
         get => _contactList;
-        set
-        {
-            if (_contactList != value)
-            {
-                _contactList = value;
-                OnPropertyChanged(nameof(ContactList));
-            }
-        }
+        set => _contactList = value;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

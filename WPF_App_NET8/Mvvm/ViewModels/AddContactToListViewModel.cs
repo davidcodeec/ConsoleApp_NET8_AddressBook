@@ -61,7 +61,7 @@ public partial class AddContactToListViewModel : ObservableObject
                 _contactList ??= _sharedDataService?.ContactList ?? new ObservableCollection<IContact>();
 
                 // Use the IContactService to add the contact
-                response = _contactService?.AddContactToList(newContact) ?? response;
+                response = _contactService?.AddContactToList(newContact);
 
 
                 if (response.Status == ClassLibrary.Shared.Enums.ServiceStatus.SUCCESSED)
@@ -74,27 +74,18 @@ public partial class AddContactToListViewModel : ObservableObject
                     ContactForm.Address = string.Empty;
 
                     // Load existing contacts from the file
-                    var existingListJson = _fileService.GetContentFromFile(_filePath);
-                    var existingList = JsonConvert.DeserializeObject<ObservableCollection<IContact>>(existingListJson) ?? new ObservableCollection<IContact>();
-
-                    // Add the new contact
-                    existingList.Add(newContact);
+                    // Add the new contact to the shared list
+                    _contactList.Add(newContact);
 
                     // Save the updated list to the file
-                    var json = JsonConvert.SerializeObject(existingList, new JsonSerializerSettings
+                    var json = JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.Objects,
                         Formatting = Formatting.Indented
                     });
 
                     _fileService.SaveToFile(_filePath, json);
-
-                    // Update the local _contactList to reflect the changes
-                    _contactList.Clear();
-                    foreach (var contact in existingList)
-                    {
-                        _contactList.Add(contact);
-                    }
+                    Debug.WriteLine("Contact added and saved successfully.");
 
                     OnPropertyChanged(nameof(_contactList));
                 }
